@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Câu 11 - Hiển thị tên file</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:300,400|Oswald:400,700');
+* { padding: 0; margin: 0; box-sizing: border-box }
+body {font-family:'Lato',sans-serif;padding: 30px;background: #eaebeb;}
+
+.text-center { text-align: center; margin-bottom: 40px; }
+
+.custom-file-wrp {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.filename {
+	background: #fff;
+	padding: 15px;
+	border: 1px solid #ddd;
+	width: 300px;
+	margin-right: 15px;
+	color: #999;
+	text-align: center;
+}
+
+.custom-file input[type="file"] { display: none; }
+
+.custom-file label {
+	cursor: pointer;
+	background: #ed1c24;
+	color: #fff;
+	padding: 14px 40px;
+	border-radius: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<h2 class="text-center">Custom File Input</h2>
+
+<div class="custom-file-wrp">
+	<div class="filename">Ex: sample.jpg</div>
+	<div class="custom-file">
+		<label for="fileupload">Upload</label>
+		<input type="file" id="fileupload">
+	</div>
+</div>
+
+<script>
+$(function(){
+  $("#fileupload").on("change", function(){
+    var file = this.files[0]; // Lấy file đầu tiên được chọn
+    if (file) {
+      var fileName = file.name; // Lấy tên file (có cả phần mở rộng)
+      $(".filename").text("Bạn đã chọn: " + fileName);
+    } else {
+      $(".filename").text("Ex: sample.jpg");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

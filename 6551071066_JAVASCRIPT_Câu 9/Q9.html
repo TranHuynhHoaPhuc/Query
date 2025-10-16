@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Form Validation Exercise</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+  }
+  h2 {
+    color: darkgreen;
+    text-align: center;
+  }
+  label {
+    display: inline-block;
+    width: 200px;
+    margin-top: 8px;
+  }
+  input, select {
+    padding: 4px;
+  }
+  .buttons {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Personal Information</h2>
+
+<form id="regForm">
+  <label>Enter name*:</label>
+  <input type="text" id="name"><br>
+
+  <label>Sex*:</label>
+  <input type="radio" name="sex" value="Male">Male
+  <input type="radio" name="sex" value="Female">Female<br>
+
+  <label>Enter email address*:</label>
+  <input type="text" id="email"><br>
+
+  <label>Enter birthday (MM/DD/YYYY)*:</label>
+  <input type="text" id="dob" placeholder="MM/DD/YYYY"><br>
+
+  <label>Enter street address (line 1)*:</label>
+  <input type="text" id="address"><br>
+
+  <label>Enter city*:</label>
+  <input type="text" id="city"><br>
+
+  <label>Select a region*:</label>
+  <select id="region">
+    <option value="">--Select--</option>
+    <option>North</option>
+    <option>South</option>
+    <option>East</option>
+    <option>West</option>
+  </select><br>
+
+  <label>Enter 5-digit ZIP code*:</label>
+  <input type="text" id="zip" maxlength="5"><br>
+
+  <div class="buttons">
+    <button type="button" id="finish">Finished</button>
+    <button type="button" id="clear">Clear</button>
+  </div>
+</form>
+
+<p class="error" id="errorMsg"></p>
+
+<script>
+$(document).ready(function(){
+
+  $("#clear").click(function(){
+    $("#regForm")[0].reset();
+    $("#errorMsg").text("");
+  });
+
+  $("#finish").click(function(){
+    var name = $("#name").val().trim();
+    var email = $("#email").val().trim();
+    var dob = $("#dob").val().trim();
+    var address = $("#address").val().trim();
+    var city = $("#city").val().trim();
+    var region = $("#region").val();
+    var zip = $("#zip").val().trim();
+    var sex = $("input[name='sex']:checked").val();
+    var error = "";
+
+    if (name === "" || !sex || email === "" || dob === "" ||
+        address === "" || city === "" || region === "" || zip === "") {
+      error += "All fields marked * are required.<br>";
+    }
+
+    var emailPattern = /^[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (email !== "" && !emailPattern.test(email)) {
+      error += " Invalid email format.<br>";
+    }
+
+    var dobPattern = /^(0?[1-9]|1[0-2])[\/-](0?[1-9]|[12][0-9]|3[01])[\/-](\d{4})$/;
+    if (dob !== "" && !dobPattern.test(dob)) {
+      error += " Birthday must be in MM/DD/YYYY or MM-DD-YYYY format.<br>";
+    } else if (dobPattern.test(dob)) {
+      var parts = dob.split(/[-\/]/);
+      var month = parseInt(parts[0]);
+      var day = parseInt(parts[1]);
+      var year = parseInt(parts[2]);
+      var currentYear = new Date().getFullYear();
+      if (month < 1 || month > 12 || year >= currentYear) {
+        error += " Invalid date of birth.<br>";
+      }
+    }
+
+    var zipPattern = /^\d{5}$/;
+    if (zip !== "" && !zipPattern.test(zip)) {
+      error += " ZIP code must be 5 digits.<br>";
+    }
+
+    if (error === "") {
+      alert(" Registration Successful!");
+      $("#errorMsg").text("");
+    } else {
+      $("#errorMsg").html(error);
+    }
+  });
+});
+</script>
+
+</body>
+</html>

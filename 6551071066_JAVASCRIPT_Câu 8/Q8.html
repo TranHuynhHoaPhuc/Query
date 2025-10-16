@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Máy tính DOM và jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f4f4f4;
+    }
+    .calculator {
+      background: white;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input {
+      width: 60px;
+      height: 30px;
+      text-align: center;
+      font-size: 16px;
+    }
+    button {
+      width: 40px;
+      height: 35px;
+      margin: 3px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #555;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h3>Máy tính đơn giản</h3>
+    <input type="text" id="num1" placeholder="a">
+    <button class="op">+</button>
+    <button class="op">-</button>
+    <button class="op">x</button>
+    <button class="op">/</button>
+    <button class="op">^</button>
+    <input type="text" id="num2" placeholder="b">
+    <button id="equal">=</button>
+    <input type="text" id="result" readonly placeholder="Kết quả">
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      var operator = "";
+
+      $(".op").click(function(){
+        operator = $(this).text();
+      });
+
+      $("#equal").click(function(){
+        var num1 = parseFloat($("#num1").val());
+        var num2 = parseFloat($("#num2").val());
+        var result = "";
+
+        if(isNaN(num1) || isNaN(num2)){
+          alert("Vui lòng nhập đủ hai số!");
+          return;
+        }
+
+        switch(operator){
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case 'x': result = num1 * num2; break;
+          case '/': 
+            result = (num2 !== 0) ? (num1 / num2) : "Lỗi chia 0"; 
+            break;
+          case '^': result = Math.pow(num1, num2); break;
+          default: 
+            alert("Vui lòng chọn phép toán!"); 
+            return;
+        }
+
+        $("#result").val(result);
+      });
+    });
+  </script>
+</body>
+</html>

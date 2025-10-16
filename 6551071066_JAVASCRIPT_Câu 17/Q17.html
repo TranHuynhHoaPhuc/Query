@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm hiểu về Accordion</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: bold;
+        }
+
+        h3 {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        h3:hover {
+            background-color: #2980b9;
+        }
+
+        .box {
+            border: 2px solid #3498db;
+            display: none; 
+            padding: 10px;
+            background-color: #fff;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            border-radius: 0 0 5px 5px;
+            box-sizing: border-box;
+        }
+    </style>
+
+
+    <script>
+        $(document).ready(function () {
+            $("h3").click(function () {
+
+                $(".box").not($(this).next()).slideUp();
+
+               
+                $(this).next().slideToggle();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Tìm hiểu về Accordion</h2>
+
+    <h3>topic 1 - HTML</h3>
+    <div class="box">
+        HTML (viết tắt của từ <b>HyperText Markup Language</b>, hay còn gọi là "Ngôn ngữ Đánh dấu Siêu văn bản") là
+        ngôn ngữ được thiết kế để tạo nên các trang web trên World Wide Web.
+    </div>
+
+    <h3>topic 2 - CSS</h3>
+    <div class="box">
+        CSS là chữ viết tắt của <b>Cascading Style Sheets</b>, là ngôn ngữ định kiểu cho các phần tử HTML giúp trang web
+        hiển thị đẹp và rõ ràng hơn.
+    </div>
+
+    <h3>topic 3 - jQuery</h3>
+    <div class="box">
+        jQuery là thư viện JavaScript giúp đơn giản hóa thao tác DOM, xử lý sự kiện, hiệu ứng và Ajax.
+    </div>
+</body>
+
+</html>

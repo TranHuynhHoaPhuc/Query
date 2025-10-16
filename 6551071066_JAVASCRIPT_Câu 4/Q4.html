@@ -1,0 +1,32 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8" />  
+<title>Remove items from a dropdown list</title>  
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>  
+
+<body>  
+<form>  
+<select id="colorSelect">  
+<option>Red</option>  
+<option>Green</option>  
+<option>White</option>  
+<option>Black</option>  
+</select>  
+<input type="button" id="removeBtn" value="Select and Remove">  
+</form>  
+
+<script>
+$(document).ready(function(){
+    $("#removeBtn").click(function(){
+        var selectedColor = $("#colorSelect").val();
+
+        $("#colorSelect option:selected").remove();
+
+        alert("Đã xóa: " + selectedColor);
+    });
+});
+</script>
+</body>
+</html>
